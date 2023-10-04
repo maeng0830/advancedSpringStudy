@@ -4,7 +4,7 @@ import hello.advanced.trace.TraceId;
 import hello.advanced.trace.TraceStatus;
 import lombok.extern.slf4j.Slf4j;
 
-// for app.v3
+// for app.v3 ~
 // 파라미터가 아닌, 필드를 통해 동기화를 한다.
 // FieldLogTrace는 싱글톤으로 등록된 스프링 빈이기 때문에, 이 객체의 인스턴스가 어플리케이션에 딱 1개만 존재한다.
 // 하나만 존재하는 인스턴스의 traceHolder 필드에 여러 쓰레드가 동시에 접근하기 때문에 동시성 문제가 발생한다.
