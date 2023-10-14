@@ -10,6 +10,7 @@ import hello.proxy.trace.logtrace.LogTrace;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+// for app.v2
 // 인터페이스가 없는 구체 클래스로 프록시 구현: 프록시는 서버를 상속한다.
 // 서버가 아닌 프록시를 빈으로 등록한다.
 // 서버를 빈으로 등록하지 않는다고 해서, 서버를 사용하지 않는 것이 아니다. 프록시가 서버를 의존하고 있다.
