@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Configuration;
 public class BeanPostProcessorTest {
 
 	@Test
-	void basicConfig() {
+	void beanPostProcessorConfig() {
 		// 스프링 컨테이너
 		// BeanPostProcessorConfig를 토대로 스프링 컨테이너에 스프링 빈을 등록한다.
 		ApplicationContext applicationContext = new AnnotationConfigApplicationContext(
