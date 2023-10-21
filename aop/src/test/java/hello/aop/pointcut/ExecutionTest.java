@@ -16,7 +16,7 @@ public class ExecutionTest {
 	/*
 	 * execution(접근제어자? 반환타입 선언타입?메서드명(파라미터) 예외?)
 	 *
-	 * ?가 붙는 접근제어자와 선언타입은 생략할 수 있다. 선언타입 = 패키지 + target 클래스
+	 * ?가 붙는 접근제어자와 선언타입은 생략할 수 있다. 선언타입 = 패키지 + 타입
 	 * *은 어떤 값이든 상관 없다는 의미이다.
 	 * ..는 어떤 파라미터 목록이든 상관 없다는 의미이다.
 	 */
@@ -47,7 +47,7 @@ public class ExecutionTest {
 		pointcut.setExpression(
 				"execution(public String hello.aop.member.MemberServiceImpl.hello(String))");
 
-		// MemberServiceImpl의 helloMethod가 포인트컷을 만족하는가
+		// MemberServiceImpl의 hello()가 포인트컷을 만족하는가
 		assertThat(pointcut.matches(helloMethod, MemberServiceImpl.class)).isTrue();
 	}
 
@@ -60,7 +60,7 @@ public class ExecutionTest {
 		// 예외?: 없음
 		pointcut.setExpression("execution(* *(..))");
 
-		// MemberServiceImpl의 helloMethod가 포인트컷을 만족하는가
+		// MemberServiceImpl의 hello()가 포인트컷을 만족하는가
 		assertThat(pointcut.matches(helloMethod, MemberServiceImpl.class)).isTrue();
 	}
 
@@ -76,7 +76,7 @@ public class ExecutionTest {
 		// 예외?: 없음
 		pointcut.setExpression("execution(* hello(..))");
 
-		// MemberServiceImpl의 helloMethod가 포인트컷을 만족하는가
+		// MemberServiceImpl의 hello()가 포인트컷을 만족하는가
 		assertThat(pointcut.matches(helloMethod, MemberServiceImpl.class)).isTrue();
 	}
 
@@ -89,7 +89,7 @@ public class ExecutionTest {
 		// 예외?: 없음
 		pointcut.setExpression("execution(* hel*(..))");
 
-		// MemberServiceImpl의 helloMethod가 포인트컷을 만족하는가
+		// MemberServiceImpl의 hello()가 포인트컷을 만족하는가
 		assertThat(pointcut.matches(helloMethod, MemberServiceImpl.class)).isTrue();
 	}
 
@@ -102,7 +102,7 @@ public class ExecutionTest {
 		// 예외?: 없음
 		pointcut.setExpression("execution(* *el*(..))");
 
-		// MemberServiceImpl의 helloMethod가 포인트컷을 만족하는가
+		// MemberServiceImpl의 hello()가 포인트컷을 만족하는가
 		assertThat(pointcut.matches(helloMethod, MemberServiceImpl.class)).isTrue();
 	}
 
@@ -115,7 +115,7 @@ public class ExecutionTest {
 		// 예외?: 없음
 		pointcut.setExpression("execution(* nono(..))");
 
-		// MemberServiceImpl의 helloMethod가 포인트컷을 만족하는가
+		// MemberServiceImpl의 hello()가 포인트컷을 만족하는가
 		assertThat(pointcut.matches(helloMethod, MemberServiceImpl.class)).isFalse();
 	}
 
@@ -132,7 +132,7 @@ public class ExecutionTest {
 		// 예외?: 없음
 		pointcut.setExpression("execution(* hello.aop.member.MemberServiceImpl.hello(..))");
 
-		// MemberServiceImpl의 helloMethod가 포인트컷을 만족하는가
+		// MemberServiceImpl의 hello()가 포인트컷을 만족하는가
 		assertThat(pointcut.matches(helloMethod, MemberServiceImpl.class)).isTrue();
 	}
 
@@ -145,7 +145,7 @@ public class ExecutionTest {
 		// 예외?: 없음
 		pointcut.setExpression("execution(* hello.aop.member.*.*(..))");
 
-		// MemberServiceImpl의 helloMethod가 포인트컷을 만족하는가
+		// MemberServiceImpl의 hello()가 포인트컷을 만족하는가
 		assertThat(pointcut.matches(helloMethod, MemberServiceImpl.class)).isTrue();
 	}
 
@@ -159,7 +159,7 @@ public class ExecutionTest {
 		// 예외?: 없음
 		pointcut.setExpression("execution(* hello.aop.*.*(..))");
 
-		// MemberServiceImpl의 helloMethod가 포인트컷을 만족하는가
+		// MemberServiceImpl의 hello()가 포인트컷을 만족하는가
 		assertThat(pointcut.matches(helloMethod, MemberServiceImpl.class)).isFalse();
 	}
 
@@ -173,7 +173,7 @@ public class ExecutionTest {
 		// 예외?: 없음
 		pointcut.setExpression("execution(* hello.aop..*.*(..))");
 
-		// MemberServiceImpl의 helloMethod가 포인트컷을 만족하는가
+		// MemberServiceImpl의 hello()가 포인트컷을 만족하는가
 		assertThat(pointcut.matches(helloMethod, MemberServiceImpl.class)).isTrue();
 	}
 
@@ -189,7 +189,7 @@ public class ExecutionTest {
 		// 예외?: 없음
 		pointcut.setExpression("execution(* hello.aop.member.MemberServiceImpl.*(..))");
 
-		// MemberServiceImpl의 helloMethod가 포인트컷을 만족하는가
+		// MemberServiceImpl의 hello()가 포인트컷을 만족하는가
 		assertThat(pointcut.matches(helloMethod, MemberServiceImpl.class)).isTrue();
 	}
 
@@ -203,7 +203,7 @@ public class ExecutionTest {
 		// 예외?: 없음
 		pointcut.setExpression("execution(* hello.aop.member.MemberService.*(..))");
 
-		// MemberServiceImpl의 helloMethod가 포인트컷을 만족하는가
+		// MemberServiceImpl의 hello()가 포인트컷을 만족하는가
 		assertThat(pointcut.matches(helloMethod, MemberServiceImpl.class)).isTrue();
 	}
 
@@ -221,6 +221,7 @@ public class ExecutionTest {
 		// MemberServiceImpl에서 정의된 internal()
 		Method internalMethod = MemberServiceImpl.class.getMethod("internal", String.class);
 
+		// MemberServiceImpl의 internal()이 포인트컷을 만족하는가
 		assertThat(pointcut.matches(internalMethod, MemberServiceImpl.class)).isFalse();
 	}
 
@@ -238,7 +239,7 @@ public class ExecutionTest {
 		// 예외?: 없음
 		pointcut.setExpression("execution(* *(String))");
 
-		// MemberServiceImpl의 helloMethod가 포인트컷을 만족하는가
+		// MemberServiceImpl의 hello()가 포인트컷을 만족하는가
 		assertThat(pointcut.matches(helloMethod, MemberServiceImpl.class)).isTrue();
 	}
 
@@ -253,7 +254,7 @@ public class ExecutionTest {
 		// 예외?: 없음
 		pointcut.setExpression("execution(* *())");
 
-		// MemberServiceImpl의 helloMethod가 포인트컷을 만족하는가
+		// MemberServiceImpl의 hello()가 포인트컷을 만족하는가
 		assertThat(pointcut.matches(helloMethod, MemberServiceImpl.class)).isFalse();
 	}
 
@@ -268,7 +269,7 @@ public class ExecutionTest {
 		// 예외?: 없음
 		pointcut.setExpression("execution(* *(*))");
 
-		// MemberServiceImpl의 helloMethod가 포인트컷을 만족하는가
+		// MemberServiceImpl의 hello()가 포인트컷을 만족하는가
 		assertThat(pointcut.matches(helloMethod, MemberServiceImpl.class)).isTrue();
 	}
 
@@ -283,7 +284,7 @@ public class ExecutionTest {
 		// 예외?: 없음
 		pointcut.setExpression("execution(* *(..))");
 
-		// MemberServiceImpl의 helloMethod가 포인트컷을 만족하는가
+		// MemberServiceImpl의 hello()가 포인트컷을 만족하는가
 		assertThat(pointcut.matches(helloMethod, MemberServiceImpl.class)).isTrue();
 	}
 
@@ -298,7 +299,7 @@ public class ExecutionTest {
 		// 예외?: 없음
 		pointcut.setExpression("execution(* *(String, ..))");
 
-		// MemberServiceImpl의 helloMethod가 포인트컷을 만족하는가
+		// MemberServiceImpl의 hello()가 포인트컷을 만족하는가
 		assertThat(pointcut.matches(helloMethod, MemberServiceImpl.class)).isTrue();
 	}
 }

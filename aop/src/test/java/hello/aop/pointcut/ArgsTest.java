@@ -12,10 +12,10 @@ import org.springframework.aop.aspectj.AspectJExpressionPointcut;
 public class ArgsTest {
 
 	/**
-	 * args(파라미터)
+	 * args(파라미터 목록)
 	 *
-	 * args는 파라미터를 기준으로 매칭하는 포인트컷 지시자이다.
-	 * execution는 파라미터의 타입을 정확히 지정해야 매칭되지만, args는 파라미터의 타입으로 상위 타입을 지정해도 매칭된다.
+	 * args는 파라미터 목록을 기준으로 매칭하는 포인트컷 지시자이다.
+	 * execution는 각 파라미터의 타입을 정확히 지정해야 매칭되지만, args는 각 파라미터의 타입으로 상위 타입을 지정해도 매칭된다.
 	 */
 
 	Method helloMethod;
