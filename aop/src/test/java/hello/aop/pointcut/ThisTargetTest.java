@@ -12,20 +12,20 @@ import org.springframework.context.annotation.Import;
 
 @Slf4j
 @Import(ThisTargetTest.ThisTargetAspect.class)
-@SpringBootTest(properties = "spring.aop.proxy-target-class=false") //JDK 동적프록시
-//@SpringBootTest(properties = "spring.aop.proxy-target-class=true") //CGLIB
+//@SpringBootTest(properties = "spring.aop.proxy-target-class=false") //JDK 동적프록시
+@SpringBootTest(properties = "spring.aop.proxy-target-class=true") //CGLIB
 public class ThisTargetTest {
 
-	/**
-	 * this(선언타입)은 선언타입과 일치하는 빈으로 등록된 객체(스프링 AOP 프록시)를 조인 포인트로 적용한다.
-	 * target(선언타입)은 선언타입과 일치하는 타겟 객체(스프링 AOP 프록시가 참조하는 객체)를 조인 포인트로 적용한다.
+	/*
+	 * this(선언타입)은 선언타입과 일치하는 빈으로 등록된 객체(스프링 AOP 프록시)의 조인 포인트를 포인트컷으로 지정한다.
+	 * target(선언타입)은 선언타입과 일치하는 타겟 객체(스프링 AOP 프록시가 참조하는 객체)의 조인 포인트를 포인트컷으로 지정한다.
 	 * <p>
 	 * 타입 하나를 정확하게 지정해야한다. *와 같은 패턴을 사용할 수 없다.
 	 * <p>
 	 * 상위 타입을 지정하면, 하위 타입도 적용된다.
 	 */
 
-	/**
+	/*
 	 * 스프링 AOP 프록시는 JDK 동적 프록시 또는 CGLIB를 통해 생성된다.
 	 * JDK 동적 프록시는 인터페이스가 필수이고, 인터페이스를 구현한 프록시를 생성한다.
 	 * CGLIB는 인터페이스가 필수적이지 않으며, 인터페이스가 있더라도 구현 클래스를 상속 받아 프록시를 생성한다.
@@ -40,6 +40,19 @@ public class ThisTargetTest {
 	 *
 	 * 반대로 CGLIB는 인터페이스가 있더라도 구현 클래스를 상속해서 프록시를 생성하기 때문에, 구현 클래스는 프록시의 상위 클래스이다.
 	 * 따라서 this(구현클래스 선언타입)으로 표현식을 작성하면, 프록시는 조인포인트로 적용된다.
+	 */
+
+	/*
+	 * JDK 동적 프록시 결과
+	 * [this-interface] String hello.aop.member.MemberService.hello(String)
+	 * [target-interface] String hello.aop.member.MemberService.hello(String)
+	 * [target-impl] String hello.aop.member.MemberService.hello(String)
+	 *
+	 * CGLIB 결과
+	 * [this-interface] String hello.aop.member.MemberServiceImpl.hello(String)
+	 * [target-interface] String hello.aop.member.MemberServiceImpl.hello(String)
+	 * [this-impl] String hello.aop.member.MemberServiceImpl.hello(String)
+	 * [target-impl] String hello.aop.member.MemberServiceImpl.hello(String)
 	 */
 
 	@Autowired

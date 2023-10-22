@@ -16,7 +16,7 @@ import org.springframework.context.annotation.Import;
 public class BeanTest {
 
 	/**
-	 * bean(beanName)은 해당 beanName을 가진 타켓을 조인 포인트로 적용한다.
+	 * bean(beanName)은 해당 beanName을 가진 타켓의 조인포인트를 포인트컷으로 지정한다.
 	 */
 
 	@Autowired

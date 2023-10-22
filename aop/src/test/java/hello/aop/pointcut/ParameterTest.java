@@ -21,11 +21,11 @@ import org.springframework.context.annotation.Import;
 public class ParameterTest {
 
 	/*
-	 * this, target, args, @target, @within, @annotation, @args 포인트컷 지시자는 어드바이스에 파라미터를 전달할 수 있다.
+	 * this, target, args, @target, @within, @annotation, @args 포인트컷 지시자는 인자를 어드바이스의 파라미터에 전달할 수 있다.
 	 *
-	 * 어드바이스의 파라미터 이름과 포인트컷 표현식의 파라미터 이름을 맞춰줘야한다.
+	 * 어드바이스의 파라미터 이름과 포인트컷 표현식의 인자 이름을 맞춰줘야한다.
 	 *
-	 * 포인트컷 표현식의 파라미터 타입은 어드바이스의 파라미터 타입으로 정의된다.
+	 * 포인트컷 표현식의 인자 타입은 어드바이스의 파라미터 타입으로 정의된다.
 	 * args(arg, ..), advice(String arg) -> args(String, ..)
 	 */
 
